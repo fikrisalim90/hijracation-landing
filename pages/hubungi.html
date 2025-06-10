@@ -1,8 +1,97 @@
 <!DOCTYPE html>
 <html lang="ms">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Hubungi Kami</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-br from-white via-blue-50 to-orange-50 text-gray-800 font-sans">
+
+  <!-- Header -->
+  <header class="bg-white shadow-md">
+    <div class="container mx-auto flex justify-between items-center px-4 py-4">
+      <h1 class="text-xl font-bold text-orange-600">Hijracation</h1>
+      <nav class="space-x-4 text-sm">
+        <a href="../index.html" class="hover:underline">Utama</a>
+        <a href="pakej.html" class="hover:underline">Pakej</a>
+        <a href="tentang.html" class="hover:underline">Tentang</a>
+        <a href="hubungi.html" class="underline font-semibold text-blue-600">Hubungi</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main class="container mx-auto px-4 py-12 max-w-xl">
+    <h2 class="text-3xl font-bold text-center text-orange-600 mb-8">Tempah Sekarang</h2>
+
+    <form class="space-y-6" onsubmit="sendWhatsApp(); return false;">
+      <div>
+        <label class="block mb-1 font-semibold">Nama Penuh</label>
+        <input type="text" id="nama" class="w-full border border-gray-300 rounded px-4 py-2" placeholder="Contoh: Ahmad Bin Ali" required>
+      </div>
+
+      <div>
+        <label class="block mb-1 font-semibold">Nombor Telefon</label>
+        <input type="tel" id="telefon" class="w-full border border-gray-300 rounded px-4 py-2" placeholder="Contoh: 012-3456789" required>
+      </div>
+
+      <div>
+        <label class="block mb-1 font-semibold">Email</label>
+        <input type="email" id="email" class="w-full border border-gray-300 rounded px-4 py-2" placeholder="Contoh: ahmad@email.com" required>
+      </div>
+
+      <div>
+        <label class="block mb-1 font-semibold">Tarikh Perjalanan</label>
+        <input type="date" id="tarikh" class="w-full border border-gray-300 rounded px-4 py-2" required>
+      </div>
+
+      <div>
+        <label class="block mb-1 font-semibold">Pakej Pilihan</label>
+        <select id="pakej" class="w-full border border-gray-300 rounded px-4 py-2" required>
+          <option selected disabled>Pilih satu pakej</option>
+          <option>Padang + Bukittinggi (4H3M)</option>
+          <option>Umrah Transformasi</option>
+          <option>Turki + Umrah</option>
+          <option>Bali</option>
+          <option>Medan</option>
+          <option>Batam</option>
+          <option>Dalat</option>
+          <option>Hatyai</option>
+          <option>North Xinjiang</option>
+          <option>Chongqing</option>
+          <option>Tokyo</option>
+          <option>Okinawa</option>
+          <option>Jeju Island</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="block mb-1 font-semibold">Jenis Perjalanan</label>
+        <select id="persona" class="w-full border border-gray-300 rounded px-4 py-2" required>
+          <option selected disabled>Pilih jenis perjalanan</option>
+          <option>Solo Hijrah</option>
+          <option>Bersama Keluarga</option>
+          <option>Wanita Sahaja</option>
+          <option>Bujang Circle</option>
+          <option>Rombongan Masjid/NGO</option>
+        </select>
+      </div>
+
+      <div class="text-center">
+        <button type="submit" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded font-semibold shadow">
+          Hantar Sekarang
+        </button>
+      </div>
+    </form>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center text-sm text-gray-500 py-6">
+    &copy; 2025 <span class="font-semibold text-orange-600">Hijracation</span>. Semua Hak Dilindungi.
+  </footer>
+
+  <!-- JS -->
   <script>
     function sendWhatsApp() {
       const nama = document.getElementById('nama').value;
@@ -13,73 +102,17 @@
       const persona = document.getElementById('persona').value;
 
       // Hantar ke Google Sheets
-      fetch("https://script.google.com/macros/s/AKfycbzZP4fqkMK6xFajQ1fj5IhxCqvIPgYQ0K0YMKisueK7wAi9WoMb0QJzy0UzCrXGC1Wy/exec", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ nama, telefon, email, tarikh, pakej, persona })
-});
+      fetch("https://script.google.com/macros/s/AKfycbx9djYhqi5qNcobqr5FuCnZZCuzPCcXbJlVoXS5ZxghJIpmWhTSv_oR_w-LbBKkfaBN/exec", {
+        method: "POST",
+        body: JSON.stringify({ nama, telefon, email, tarikh, pakej, persona }),
+        headers: { "Content-Type": "application/json" }
+      });
 
       // Redirect ke WhatsApp
-      const msg = `Assalamualaikum, saya berminat untuk daftar pakej.\n\nNama: ${nama}\nTelefon: ${telefon}\nEmel: ${email}\nTarikh: ${tarikh}\nPakej: ${pakej}\nJenis Perjalanan: ${persona}`;
-      const url = `https://wa.me/601127008090?text=${encodeURIComponent(msg)}`;
-      window.open(url, '_blank');
+      const msg = `Assalamualaikum, saya berminat untuk daftar pakej.\nNama: ${nama}\nTelefon: ${telefon}\nEmail: ${email}\nTarikh: ${tarikh}\nPakej: ${pakej}\nJenis Perjalanan: ${persona}`;
+      window.open(`https://wa.me/601127008090?text=${encodeURIComponent(msg)}`);
     }
   </script>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-white text-gray-900">
-  <div class="max-w-2xl mx-auto p-6">
-    <h1 class="text-3xl font-bold mb-6">Hubungi Kami</h1>
-    <form onsubmit="sendWhatsApp(); return false;" class="space-y-4">
-      <div>
-        <label class="block mb-1 font-semibold">Nama Penuh</label>
-        <input type="text" id="nama" class="w-full border border-gray-300 rounded px-4 py-2" required>
-      </div>
-      <div>
-        <label class="block mb-1 font-semibold">Nombor Telefon</label>
-        <input type="tel" id="telefon" class="w-full border border-gray-300 rounded px-4 py-2" required>
-      </div>
-      <div>
-        <label class="block mb-1 font-semibold">Alamat Emel</label>
-        <input type="email" id="email" class="w-full border border-gray-300 rounded px-4 py-2" required>
-      </div>
-      <div>
-        <label class="block mb-1 font-semibold">Tarikh Pilihan</label>
-        <input type="date" id="tarikh" class="w-full border border-gray-300 rounded px-4 py-2" required>
-      </div>
-      <div>
-        <label class="block mb-1 font-semibold">Pakej Pilihan</label>
-        <select id="pakej" class="w-full border border-gray-300 rounded px-4 py-2" required>
-          <option disabled selected>Pilih satu pakej</option>
-          <option>Pakej Padang Bukit Tinggi</option>
-          <option>Umrah</option>
-          <option>Bali</option>
-          <option>Medan</option>
-          <option>Batam</option>
-          <option>Dalat</option>
-          <option>Hatyai</option>
-          <option>North Xinjiang</option>
-          <option>Chongqing</option>
-          <option>Turki</option>
-          <option>Tokyo</option>
-          <option>Okinawa</option>
-          <option>Jeju Island</option>
-        </select>
-      </div>
-      <div>
-        <label class="block mb-1 font-semibold">Jenis Perjalanan</label>
-        <select id="persona" class="w-full border border-gray-300 rounded px-4 py-2" required>
-          <option disabled selected>Pilih jenis perjalanan</option>
-          <option>Solo Hijrah</option>
-          <option>Bersama Keluarga</option>
-          <option>Group Kawan / Jemaah</option>
-          <option>Pasangan (suami isteri)</option>
-        </select>
-      </div>
-      <div>
-        <button type="submit" class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded hover:bg-blue-700 transition">Hantar Sekarang</button>
-      </div>
-    </form>
-  </div>
+
 </body>
 </html>
