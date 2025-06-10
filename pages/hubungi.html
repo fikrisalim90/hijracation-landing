@@ -1,87 +1,70 @@
 <!DOCTYPE html>
 <html lang="ms">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
   <title>Hubungi Kami</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-white text-gray-800 font-sans">
-
-  <header class="bg-blue-900 text-white p-4">
-    <div class="container mx-auto flex justify-between items-center">
-      <h1 class="text-xl font-bold">Hijracation</h1>
-      <nav class="space-x-4">
-        <a href="../index.html" class="hover:underline">Utama</a>
-        <a href="pakej.html" class="hover:underline">Pakej</a>
-        <a href="tentang.html" class="hover:underline">Tentang</a>
-        <a href="hubungi.html" class="underline font-semibold">Hubungi</a>
-      </nav>
-    </div>
-  </header>
-
-  <main class="container mx-auto px-4 py-12 max-w-xl">
-    <h2 class="text-3xl font-bold text-center text-orange-600 mb-8">Tempah Sekarang</h2>
-
-    <form onsubmit="sendWhatsApp(); return false;" class="space-y-6">
-
-      <div>
-        <label class="block mb-1 font-semibold">Nama Penuh</label>
-        <input type="text" id="nama" class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-      </div>
-
-      <div>
-        <label class="block mb-1 font-semibold">Nombor Telefon</label>
-        <input type="tel" id="telefon" class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-      </div>
-
-      <div>
-        <label class="block mb-1 font-semibold">Tarikh Perjalanan</label>
-        <input type="date" id="tarikh" class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-      </div>
-
-      <div>
-        <label class="block mb-1 font-semibold">Pakej Pilihan</label>
-        <select id="pakej" class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" required>
-          <option selected disabled>Pilih satu pakej</option>
-          <option>Padang + Bukittinggi (4H3M)</option>
-          <option>Umrah Transformasi</option>
-          <option>Turki + Umrah</option>
-        </select>
-      </div>
-
-      <div class="text-center">
-        <button type="submit" class="bg-orange-500 hover:bg-orange-600 text-white px-6 py-2 rounded text-lg font-semibold">Hantar Sekarang</button>
-      </div>
-    </form>
-  </main>
-
-  <footer class="text-center text-sm text-gray-500 py-6">
-    &copy; 2025 Hijracation. Semua Hak Dilindungi.
-  </footer>
-
   <script>
     function sendWhatsApp() {
       const nama = document.getElementById('nama').value;
       const telefon = document.getElementById('telefon').value;
+      const email = document.getElementById('email').value;
       const tarikh = document.getElementById('tarikh').value;
       const pakej = document.getElementById('pakej').value;
+      const persona = document.getElementById('persona').value;
 
-      // Simpan ke Google Sheets
-      fetch("https://script.google.com/macros/s/AKfycbwF3rCspzlo2HkWd08topgst_RsEOZ9MuK93NZ5SvDjWuOaCsP6GqL1Qn_Myou4tnYs/exec", {
+      // Hantar ke Google Sheets
+      fetch("https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLit4C0q2S9kz1T_7Go8VxJikZUduxKd5Rk03pLEQQTARj-sI2wv7axEdAAhkfqdWTab6ToHvrCYa4Hyi0sH929hoQiz-rWUPZ3bHB8Pl-ZEESoSc0GzFe0f5HVrnnOMDkQKGb5mRlPJFNUZk-i135XVPFm_ddBHKAAuwF5DIAoJKBvcfl7pOydZ6xc4s_mcfpMY202NbwYQU2a_5cu3guWTll8_wSvil7viWofQ2ynY7qr7PVCduBhpYrhYlDqaZUJv9LqIxgVz1d_dcRA1g32OPCsIiw&lib=MrD1X9jyDQ_TSWc_vueyJDOOGdehC96mJ", {
         method: "POST",
-        body: JSON.stringify({ nama, telefon, tarikh, pakej }),
-        headers: {
-          "Content-Type": "application/json"
-        }
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ nama, telefon, email, tarikh, pakej, persona })
       });
 
       // Redirect ke WhatsApp
-      const msg = `Assalamualaikum, saya berminat untuk daftar pakej.\n\nNama: ${nama}\nNo. Telefon: ${telefon}\nTarikh: ${tarikh}\nPakej: ${pakej}`;
+      const msg = `Assalamualaikum, saya berminat untuk daftar pakej.\n\nNama: ${nama}\nTelefon: ${telefon}\nEmel: ${email}\nTarikh: ${tarikh}\nPakej: ${pakej}\nJenis Perjalanan: ${persona}`;
       const url = `https://wa.me/601127008090?text=${encodeURIComponent(msg)}`;
       window.open(url, '_blank');
     }
   </script>
-
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-white text-gray-900">
+  <div class="max-w-2xl mx-auto p-6">
+    <h1 class="text-3xl font-bold mb-6">Hubungi Kami</h1>
+    <form onsubmit="sendWhatsApp(); return false;" class="space-y-4">
+      <div>
+        <label class="block mb-1 font-semibold">Nama Penuh</label>
+        <input type="text" id="nama" class="w-full border border-gray-300 rounded px-4 py-2" required>
+      </div>
+      <div>
+        <label class="block mb-1 font-semibold">Nombor Telefon</label>
+        <input type="tel" id="telefon" class="w-full border border-gray-300 rounded px-4 py-2" required>
+      </div>
+      <div>
+        <label class="block mb-1 font-semibold">Alamat Emel</label>
+        <input type="email" id="email" class="w-full border border-gray-300 rounded px-4 py-2" required>
+      </div>
+      <div>
+        <label class="block mb-1 font-semibold">Tarikh Pilihan</label>
+        <input type="date" id="tarikh" class="w-full border border-gray-300 rounded px-4 py-2" required>
+      </div>
+      <div>
+        <label class="block mb-1 font-semibold">Pakej Pilihan</label>
+        <input type="text" id="pakej" class="w-full border border-gray-300 rounded px-4 py-2" required>
+      </div>
+      <div>
+        <label class="block mb-1 font-semibold">Jenis Perjalanan</label>
+        <select id="persona" class="w-full border border-gray-300 rounded px-4 py-2" required>
+          <option disabled selected>Pilih jenis perjalanan</option>
+          <option>Solo Hijrah</option>
+          <option>Bersama Keluarga</option>
+          <option>Group Kawan / Jemaah</option>
+          <option>Pasangan (suami isteri)</option>
+        </select>
+      </div>
+      <div>
+        <button type="submit" class="w-full bg-blue-600 text-white font-semibold py-2 px-4 rounded hover:bg-blue-700 transition">Hantar Sekarang</button>
+      </div>
+    </form>
+  </div>
 </body>
 </html>
