@@ -13,11 +13,11 @@
       const persona = document.getElementById('persona').value;
 
       // Hantar ke Google Sheets
-      fetch("https://script.googleusercontent.com/macros/echo?user_content_key=AehSKLit4C0q2S9kz1T_7Go8VxJikZUduxKd5Rk03pLEQQTARj-sI2wv7axEdAAhkfqdWTab6ToHvrCYa4Hyi0sH929hoQiz-rWUPZ3bHB8Pl-ZEESoSc0GzFe0f5HVrnnOMDkQKGb5mRlPJFNUZk-i135XVPFm_ddBHKAAuwF5DIAoJKBvcfl7pOydZ6xc4s_mcfpMY202NbwYQU2a_5cu3guWTll8_wSvil7viWofQ2ynY7qr7PVCduBhpYrhYlDqaZUJv9LqIxgVz1d_dcRA1g32OPCsIiw&lib=MrD1X9jyDQ_TSWc_vueyJDOOGdehC96mJ", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nama, telefon, email, tarikh, pakej, persona })
-      });
+      fetch("https://script.google.com/macros/s/AKfycbzZP4fqkMK6xFajQ1fj5IhxCqvIPgYQ0K0YMKisueK7wAi9WoMb0QJzy0UzCrXGC1Wy/exec", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ nama, telefon, email, tarikh, pakej, persona })
+});
 
       // Redirect ke WhatsApp
       const msg = `Assalamualaikum, saya berminat untuk daftar pakej.\n\nNama: ${nama}\nTelefon: ${telefon}\nEmel: ${email}\nTarikh: ${tarikh}\nPakej: ${pakej}\nJenis Perjalanan: ${persona}`;
